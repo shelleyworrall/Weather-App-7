@@ -9,8 +9,8 @@ if (minutes < 10) {
     minutes=`0${minutes}`;
 }
 
-let days=
- ["Sunday",
+let days=[
+  "Sunday",
   "Monday", 
   "Tuesday",
   "Wednesday",
@@ -19,9 +19,8 @@ let days=
   "Saturday"
 ];
 
-
-let day=days[date.getDay()];
-return `${day}`${hours}:${minutes}`;
+let day= days[date.getDay()];
+return `${day}${hours}:${minutes}`;
 }
 
 
@@ -48,7 +47,7 @@ celsiusTemperature=response.data.main.temp;
      `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     iconElement.setAttribute("alt", response.data.weather[0].description);
 }
-function SearchCity {
+function search(city) {
 let apiKey="1cf0147323a8da884b1f3bea8e11e7e";
 let apiUrl=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`; 
 
@@ -63,7 +62,6 @@ function handleSubmit(event) {
 function displayFarenheitTemperature(event) {
     event.preventDefault();
     let temperatureElement= document.querySelector("#temperature");
-    //remove the active class celsius link
     celsiusLink.classList.remove("active");
     farenheitLink.classList.add("active");
     let farenheitTemperature= (celsiusTemperature * 9) / 5 +32;
@@ -74,7 +72,7 @@ function displayCelsiusTemperature(event) {
     event.preventDefault();
     celsiusLink.classList.add("active");
     farenheitLink.classList.remove("active");
-    let temperatureElement= document.querySelector("temperature");
+    let temperatureElement= document.querySelector("#temperature");
     temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
@@ -90,8 +88,7 @@ farenheitLink.addEventListener("click", displayFarenheitTemperature);
 let celsiusLink= document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
-
-    search("New York");
+search("New York");
 
 
 
